@@ -7,6 +7,7 @@ import About from './pages/About.jsx'
 import Posts from "./pages/posts.jsx"
 import DefaultLayout from './pages/DefaultLayout.jsx'
 import PostPage from './pages/PostPage.jsx'
+import globalContext from './contexts/GlobalContext.jsx'
 
 
 
