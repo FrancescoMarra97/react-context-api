@@ -1,5 +1,20 @@
-import { createContext } from "react";
+import { createContext, useState } from 'react';
 
-const globalContext = createContext()
+const GlobalContext = createContext();
 
-export default globalContext;
+export function GlobalContext({ children }) {
+    const [posts, setPosts] = useState([]);
+
+    const value = {
+        posts,
+        setPosts
+    };
+
+    return (
+        <GlobalContext.Provider value={value}>
+            {children}
+        </GlobalContext.Provider>
+    );
+}
+
+export default GlobalContext;

@@ -1,16 +1,17 @@
 import { useParams, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react";
-
+import { useContext, useEffect, useState } from "react";
+import GlobalContext from "../contexts/GlobalContext";
 
 
 export default function PostPage() {
     const navigate = useNavigate()
     const [post, setPost] = useState(null);
     const { slug } = useParams();
+    const { posts } = useContext(GlobalContext)
     const url = `http://localhost:3001/posts/${slug}`
     console.log(url);
 
-    useEffect(
+    /* useEffect(
         () => {
             fetch(url)
                 .then(res => res.json())
@@ -26,15 +27,19 @@ export default function PostPage() {
                     navigate('/404');
                 });
         }, [slug]);
-
-
+ */
+    const selectedPost = posts.find(post => post.slug === slug);
+    if (!selectedPost) {
+        navigate('/404');
+        return null;
+    }
     return (
         <div>
-            <img src={`http://localhost:3001/imgs/posts/${post.image}`} />
-            <h1>{post.title}</h1>
-            <p>{post.content}</p>
+            <img src={`http://localhost:3001/imgs/posts/${selectedPost.image}`} />
+            <h1>{selectedPost.title}</h1>
+            <p>{selectedPost.content}</p>
             <ul>
-                {post.tags.map(tag => <li key={tag}>{tag}</li>)}
+                {selectedPost.tags.map(tag => <li key={tag}>{tag}</li>)}
             </ul>
         </div>
     )

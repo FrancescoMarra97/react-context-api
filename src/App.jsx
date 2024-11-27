@@ -7,7 +7,7 @@ import About from './pages/About.jsx'
 import Posts from "./pages/posts.jsx"
 import DefaultLayout from './pages/DefaultLayout.jsx'
 import PostPage from './pages/PostPage.jsx'
-import globalContext from './contexts/GlobalContext.jsx'
+import GlobalContext from './contexts/GlobalContext.jsx'
 
 
 
@@ -19,18 +19,18 @@ function App() {
 
   return (
     <>
-
-      <BrowserRouter>
-        <Routes>
-          <Route element={<DefaultLayout />}>
-            <Route path='/' element={<Home />} />
-            <Route path='/posts' element={<Posts />}></Route>
-            <Route path='/posts/:slug' element={<PostPage />}></Route>
-            <Route path='/About' element={<About />}></Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
-
+      <GlobalContext.Provider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<DefaultLayout />}>
+              <Route path='/' element={<Home />} />
+              <Route path='/posts' element={<Posts />}></Route>
+              <Route path='/posts/:slug' element={<PostPage />}></Route>
+              <Route path='/About' element={<About />}></Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </GlobalContext.Provider>
 
     </>
   )
